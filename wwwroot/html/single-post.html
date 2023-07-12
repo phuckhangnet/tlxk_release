@@ -1,0 +1,168 @@
+<!-- <link href="css/shared.css?v=1.0.2.45" rel="stylesheet" /> -->
+<!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css" /> -->
+<!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js" type="text/javascript"></script> -->
+<!-- <script src="js/sitemap.js"></script> -->
+<link href="css/suneditor.min.css?v=1.0.2.4" rel="stylesheet" />
+
+<style>
+    #single-post {
+        padding: 2em 8vw;
+    }
+
+    #single-post .container>*:first-child {
+        margin-top: 2em;
+    }
+
+    #single-post #direct {
+        margin-top: 3em;
+    }
+
+    #single-post #direct>div:hover {
+        cursor: pointer;
+        color: var(--color-dynamic-1);
+    }
+
+    #single-post #direct.cls-flex>div {
+        max-width: 30vw;
+    }
+
+    #single-post #direct.cls-flex>div:last-child {
+        text-align: right;
+    }
+
+    #single-post #direct .title {
+        font-size: 0.9em;
+        padding: 0 0.5em;
+    }
+
+    #single-post #content #title {
+        color: var(--color-dynamic-2);
+        font-size: 1.5em;
+        padding-bottom: 1.5em;
+    }
+
+    #single-post #content #date {
+        text-align: right;
+    }
+
+    #single-post figure img {
+        max-width: 100%;
+        height: auto !important;
+        object-fit: contain;
+    }
+</style>
+
+<div id="single-post" class="container">
+    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+        <div id="content"></div>
+        <div id="direct" class="cls-flex">
+            <div id="prev" class="postclick"><span><i class="fa-solid fa-arrow-left"></i></span><span
+                    class="title"></span>
+            </div>
+            <div id="next" class="postclick"><span class="title"></span><span><i
+                        class="fa-solid fa-arrow-right"></i></span>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    $(function () {
+        loadSinglePost();
+        $('#single-post .postclick').click(function () {
+            let postid = $(this).attr('postid');
+            if (postid === "0") {
+                let postit = 'đầu tiên';
+                if ($(this).attr('id') === 'next') postit = "cuối cùng";
+                Swal.fire({
+                    position: 'center',
+                    icon: 'warning',
+                    title: 'Đây đã là bài viết ' + postit,
+                    showConfirmButton: false,
+                    timer: 1500
+                })
+            }
+            else {
+                changeURIMenuScroll(false, false, postid);
+                loadSinglePost();
+            }
+        });
+    });
+    function loadSinglePost() {
+        let sessionpost = localStorage.getItem("sessionpost");
+        localStorage.removeItem("sessionpost");
+        // form database 
+        if (sessionpost === null || sessionpost === undefined) {
+            let req = {};
+            let menuid = getUrlParameter("menu-id");
+            let postid = getUrlParameter("post-id");
+            let tablename = getUrlParameter("table-name");
+            let lang = localStorage.getItem('lang');
+            req.lang = lang;
+            if (postid !== false && postid !== null && postid !== "") {
+                req.loai = 62;
+                if (postid !== false && postid !== null && postid !== "" && tablename === "blogs")
+                    req.loai = 63;
+                req.postid = postid;
+                $('#single-post #direct').css('display', 'flex');
+            }
+            else {
+                req.loai = 61;
+                req.menuid = menuid;
+                req.menuparentid = menuid;
+                $('#single-post #direct').hide();
+            }
+            // get newest post in menuid by lang
+            $.ajax({
+                type: 'POST',
+                url: uri_api + "store/StoredProcedure",
+                data: JSON.stringify(req),
+                dataType: "json",
+                contentType: "application/json",
+                success: function (su) {
+                    if (su.message === "success") {
+                        if (su.responses.length > 0) {
+                            setPostContent(su.responses[0]);
+                        }
+                    }
+                },
+                error: function (er) {
+                    console.log(er)
+                }
+            });
+        }
+        else {
+            let su = JSON.parse(sessionpost);
+            if (su.message === "success") {
+                if (su.responses.length > 0) {
+                    setPostContent(su.responses[0]);
+                }
+            }
+        }
+    }
+
+    function setPostContent(p) {
+        let html = `<div postid="${p.id}">`;
+        html += `<p class="title" id="title">${p.title}</p>`;
+        // html += `<p id="date">${p.createdate}</p>`;
+        html += `<div class="content sun-editor-editable" postid="${p.id}">${p.articlecontent}</div>`;
+        html += `</div>`;
+        $('#single-post #content').html(html);
+        let prev = 0;
+        let prevtitle = "";
+        if (p.prev !== 0) {
+            prev = p.prev;
+            prevtitle = p.prevtitle;
+        }
+        $('#single-post #direct #prev').attr('postid', prev);
+        $('#single-post #direct #prev span.title').text(prevtitle);
+        let next = 0;
+        let nexttitle = "";
+        if (p.next !== 0) {
+            next = p.next;
+            nexttitle = p.nexttitle;
+        }
+        $('#single-post #direct #next').attr('postid', next);
+        $('#single-post #direct #next span.title').text(nexttitle);
+    }
+</script>

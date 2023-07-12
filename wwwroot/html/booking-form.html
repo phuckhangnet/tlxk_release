@@ -1,0 +1,228 @@
+<link rel="stylesheet" type="text/css" href="../css/virtual-select.min.css?v=1.0.2.4" />
+<script src="../js/virtual-select.min.js?v=1.0.2.4"></script>
+<style>
+    #booking-form-page {
+        color: var(--color-dynamic-2);
+        width: 80vw;
+        margin: 0 auto;
+    }
+
+    #booking-form-page .container>*:first-child {
+        margin-top: 2em;
+    }
+
+    #booking-form-page>*:last-child {
+        margin-top: 2em;
+    }
+
+    #booking-form-page input,
+    #booking-form-page textarea {
+        width: 100%;
+        border: 1px solid var(--color-dynamic-1);
+        padding: 0.5em;
+        color: var(--color-dynamic-2);
+        margin-bottom: 1em;
+    }
+
+    #booking-form-page #txtDiaDiem {
+        margin-top: 1em;
+    }
+
+    #booking-form-page #cboChuyenGia {
+        margin-bottom: 1em;
+    }
+
+    #booking-form-page .cls-flex>div {
+        padding: 0;
+        margin: 0;
+        flex: 1;
+    }
+
+    #booking-form-page .cls-flex>div:not(:last-child) {
+        margin-right: 1em;
+    }
+
+    #booking-form-page .title {
+        /* margin-top: 1em; */
+        margin-bottom: 0.5em;
+        font-size: 1.2em;
+    }
+
+    #booking-form-page #btnDatHen {
+        background-color: var(--color-dynamic-2);
+        color: #fff;
+    }
+
+    #booking-form-page #btnDatHen:hover {
+        background-color: var(--color-dynamic-1);
+        color: #fff;
+    }
+</style>
+
+<div id="booking-form-page" class="container">
+    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+        <!-- <div class="title">Họ tên</div> -->
+        <div><input id="txtHoTen" data-name="customname" type="text" maxlength="150" placeholder="Họ tên" /></div>
+        <div class="cls-flex">
+            <div>
+                <!-- <div class="title">Điện thoại</div> -->
+                <div><input id="txtDienThoai" data-name="customphone" type="text" maxlength="10"
+                        placeholder="Điện Thoại" />
+                </div>
+            </div>
+            <div>
+                <!-- <div class="title">Email</div> -->
+                <div><input id="txtEmail" data-name="customemail" type="text" maxlength="50" type="email"
+                        placeholder="Email" /></div>
+            </div>
+        </div>
+        <!-- <div class="title">Chọn chuyên gia</div> -->
+        <div id="cboChuyenGia" data-name="assignexpert"></div>
+        <div class="title">Đặt lịch từ ngày - đến ngày</div>
+        <div class="cls-flex">
+            <div><input id="txtTuNgay" data-name="datetimebook1" type="date" min="2018-06-07T00:00" /></div>
+            <div><input id="txtDenNgay" data-name="datetimebook2" type="date" min="2018-06-07T00:00" /></div>
+        </div>
+        <!-- <div class="title">Tôi cần tư vấn về?</div> -->
+        <div class="title">Địa điểm</div>
+        <div id="cboDiaDiem" data-name="addressbookvalue"></div>
+        <div><input id="txtDiaDiem" data-name="addressbook" type="text" maxlength="250" disabled="true" /></div>
+        <div class="title">Nội dung cần tư vấn</div>
+        <div><textarea id="txtNoiDung" data-name="note" rows="3" placeholder="Tôi cần tư vấn về?"></textarea></div>
+        <div><button id="btnDatHen" type="button">Đặt Hẹn</button></div>
+    </div>
+</div>
+<!-- <link rel="stylesheet" type="text/css" href="../css/root.css" />
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js" type="text/javascript"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script src="../js/pages/data_index.js"></script>
+<script src="../js/pages/sitemap.js"></script> -->
+<script>
+    $(function () {
+        $('#txtTuNgay').val(getDate());
+        $('#txtTuNgay').attr("min", getDate());
+        $('#txtDenNgay').val(getDate());
+        $('#txtDenNgay').attr("min", getDate());
+
+
+        $('#txtTuNgay').focusout(function () {
+            let mindate = $('#txtTuNgay').val();
+            $('#txtDenNgay').val(mindate);
+            $('#txtDenNgay').attr("min", mindate);
+        });
+
+        VirtualSelect.init({
+            ele: '#cboDiaDiem',
+            options: [
+                { value: "ONLINE", label: "HẸN TRỰC TUYẾN" },
+                { value: "TAI-CUA-HANG", label: "HẸN TẠI CỬA HÀNG" },
+                { value: "TAI-DIA-CHI", label: "HẸN TẠI ĐỊA CHỈ" },
+            ],
+            autoSelectFirstOption: true,
+            hideClearButton: true,
+            placeholder: "Chọn chuyên gia"
+        });
+        $('#cboDiaDiem').change(function () {
+            let optionselected = document.querySelector('#cboDiaDiem').getSelectedOptions();
+            if (optionselected.value === "TAI-DIA-CHI") {
+                $('#txtDiaDiem').attr("disabled", false);
+                $('#txtDiaDiem').attr("placeholder", "Địa chỉ cuộc hẹn chính xác");
+                $('#txtDiaDiem').val("");
+                $('#txtDiaDiem').focus();
+            }
+            else
+                $('#txtDiaDiem').val(optionselected.label);
+        });
+        // load expert
+        $.ajax({
+            type: 'POST',
+            url: uri_api + "store/StoredProcedure",
+            data: JSON.stringify({ loai: 91 }),
+            dataType: "json",
+            contentType: "application/json",
+            success: function (su) {
+                if (su.message === "success") {
+                    if (su.responses.length > 0) {
+                        VirtualSelect.init({
+                            ele: '#cboChuyenGia',
+                            options: su.responses,
+                            placeholder: "Chọn chuyên gia"
+                        });
+                    }
+                }
+            },
+            error: function (er) {
+                console.log(er)
+            }
+        });
+
+        $('#booking-form-page #btnDatHen').click(function () {
+            // check null
+            let lstTxt = [], lstEmp = [];
+            $.each($('#booking-form-page input[data-name]:not(#booking-form-page input[type="email"]), #booking-form-page textarea[data-name]'), function (i, el) {
+                if ($(el).val() === "") {
+                    lstTxt.push($(el).attr("placeholder"));
+                    lstEmp.push($(el));
+                }
+            });
+            if (lstEmp.length > 0) {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Thông tin còn thiếu:',
+                    html: lstTxt.join("<br>"),
+                    confirmButtonText: "Trở lại",
+                    footer: '<b>Vui lòng bổ sung đầy đủ trước khi chọn đặt hẹn!</b>',
+                    didClose: (e) => {
+                        setTimeout(() => $(lstEmp[0]).focus(), 110);
+                    }
+                });
+            }
+            else {
+                $.ajax({
+                    type: 'POST',
+                    url: uri_api + "store/StoredProcedure",
+                    data: JSON.stringify({
+                        loai: 101,
+                        customphone: $('[data-name="customphone"]').val(),
+                        customname: $('[data-name="customname"]').val(),
+                        customemail: $('[data-name="customemail"]').val(),
+                        assignexpert: $('[data-name="assignexpert"]').val(),
+                        note: $('[data-name="note"]').val(),
+                        addressbook: $('[data-name="addressbook"]').val(),
+                        addressbookvalue: $('[data-name="addressbookvalue"]').val(),
+                        datetimebook1: $('[data-name="datetimebook1"]').val(),
+                        datetimebook2: $('[data-name="datetimebook2"]').val(),
+                    }),
+                    dataType: "json",
+                    contentType: "application/json",
+                    success: function (su) {
+                        if (su.message === "success") {
+                            Swal.fire({
+                                icon: 'success',
+                                title: 'Đã đặt hẹn thành công',
+                                confirmButtonText: "Trở lại trang chủ",
+                                footer: '<b>Chúng tôi sẽ liên hệ lại để xác nhận cuộc hẹn!<br>Vui lòng để ý điện thoại.<br>Cảm ơn./.</b>',
+                                didClose: (e) => {
+                                    $.each($('#booking-form-page input, #booking-form-page textarea'), function (i, el) {
+                                        $(el).val("");
+                                        $('#txtTuNgay').val(getDate());
+                                        $('#txtTuNgay').attr("min", getDate());
+                                        $('#txtDenNgay').val(getDate());
+                                        $('#txtDenNgay').attr("min", getDate());
+                                        $('#cboDiaDiem').trigger('change');
+                                    });
+                                }
+                            }).then((result) => {
+                                if (result.isConfirmed)
+                                    document.location.href = "/";
+                            });
+                        }
+                    },
+                    error: function (er) {
+                        console.log(er)
+                    }
+                });
+            }
+        });
+    });
+</script>

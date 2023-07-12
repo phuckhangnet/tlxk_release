@@ -1,0 +1,310 @@
+<!-- hs Navigation End -->
+<!-- hs Slider Start -->
+
+<style>
+    #banner_img .item {
+        display: none;
+    }
+
+    #banner_img .item.active {
+        display: block !important;
+    }
+
+    #banner_img img {
+        width: 100%;
+        height: auto;
+    }
+
+    .fade-in-image {
+        animation: fadeIn 5s;
+    }
+
+    #banner_img>div:nth-child(1) img {
+        content: url(../images/slide/slide01.jpg);
+    }
+
+    #banner_img>div:nth-child(2) img {
+        content: url(../images/slide/slide02.jpg);
+    }
+
+    #banner_img>div:nth-child(3) img {
+        content: url(../images/slide/slide03.jpg);
+    }
+
+    .hs_title_main_wrapper {
+        margin-top: -4vh;
+    }
+
+
+    @media (max-width: 768px) {
+        #banner_img>div:nth-child(1) img {
+            content: url(../images/slide/slide01_mob.jpg);
+        }
+
+        #banner_img>div:nth-child(2) img {
+            content: url(../images/slide/slide02_mob.jpg);
+        }
+
+        #banner_img>div:nth-child(3) img {
+            content: url(../images/slide/slide03_mob.jpg);
+        }
+    }
+</style>
+<div id="home-page">
+    <div id="slider-area" class="slider-area">
+        <div id="banner_img">
+            <div class="item active fade-in-image"><img /></div>
+            <div class="item"><img /></div>
+            <div class="item"><img /></div>
+        </div>
+    </div>
+    <!-- hs Slider End -->
+    <!-- hs title wrapper Start -->
+    <div class="hs_title_main_wrapper">
+        <div class="container">
+            <div class="row" rootcss="in-event" rootadd="true"></div>
+        </div>
+    </div>
+    <!-- hs title wrapper End -->
+    <!-- hs about ind wrapper Start -->
+    <div id="dvInfo" class="hs_about_indx_main_wrapper">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12" rootcss="in-about-title" rootadd="true"></div>
+                <div rootcss="in-about-content" rootadd="true"></div>
+            </div>
+        </div>
+    </div>
+    <div class="hs_service_main_wrapper">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                    <div class="hs_about_heading_main_wrapper" rootcss="in-portfolio-title" rootadd="true">
+
+                    </div>
+                </div>
+                <div class="portfolio-area ptb-100">
+                    <div class="container">
+                        <div class="portfolio-filter clearfix text-center">
+                            <ul id="filter">
+                                <li><a class="active" data-group="all">Tất Cả</a></li>
+                                <li><a data-group="service">Dịch Vụ</a></li>
+                                <li><a data-group="share"> Chia Sẻ</a></li>
+                            </ul>
+                        </div>
+                        <div class="row">
+                            <div id="gridWrapper" rootcss="in-portfolio" class="clearfix" rootadd="true">
+
+                            </div>
+                            <!--/#gridWrapper-->
+                        </div>
+                        <!-- /.row -->
+                    </div>
+                    <!-- /.container -->
+                </div>
+                <!--/.portfolio-area-->
+            </div>
+        </div>
+    </div>
+    <!-- hs service wrapper End -->
+    <!-- hs news slider wrapper Start -->
+    <div class="hs_news_slider_main_wrapper">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                    <div class="hs_news_slider_bg_wrapper">
+                        <div class="hs_news_slider_bg_overlay"></div>
+                        <div class="row">
+                            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                                <div class="hs_news_slider_wrapper">
+                                    <div class="owl-carousel owl-theme" rootcss="in-promo" rootadd="true"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- hs news slider wrapper End -->
+    <!-- hs latest news wrapper Start -->
+    <div class="hs_latest_news_main_wrapper">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                    <div class="hs_about_heading_main_wrapper">
+                        <div class="hs_about_heading_wrapper">
+                            <h2>Tin Tức <span> Mới</span></h2>
+                            <h4><span></span></h4>
+                        </div>
+                    </div>
+                </div>
+                <div rootcss="in-news" rootadd="true"></div>
+            </div>
+        </div>
+    </div>
+    <!-- hs latest news wrapper End -->
+    <!-- hs Counter wrapper Start -->
+    <!-- <div class="hs_counter_main_wrapper">
+        <div class="hs_counter_cont_wrapper hs_counter_cont_wrapper1">
+            <div class="count-description">
+                <div class="hs_main_cycle_main">
+                    <span class="timer">26</span>
+                </div>
+                <h5 class="con1">BÁC SĨ</h5>
+            </div>
+        </div>
+        <div class="hs_counter_cont_wrapper">
+            <div class="count-description">
+                <div class="hs_main_cycle_main">
+                    <span class="timer">33</span>
+                </div>
+                <h5 class="con2">KỸ THUẬT VIÊN
+                </h5>
+            </div>
+        </div>
+        <div class="hs_counter_cont_wrapper">
+            <div class="count-description">
+                <div class="hs_main_cycle_main">
+                    <span class="timer">58</span>
+                </div>
+                <h5 class="con3">ĐIỀU DƯỠNG
+                </h5>
+            </div>
+        </div>
+        <div class="hs_counter_cont_wrapper">
+            <div class="count-description">
+                <div class="hs_main_cycle_main">
+                    <span class="timer">10+</span>
+                </div>
+                <h5 class="con4">SỐ LƯỢNG CHUYÊN GIA
+                </h5>
+            </div>
+        </div>
+        <div class="hs_counter_cont_wrapper hs_counter_cont_wrapper5">
+            <div class="count-description">
+                <div class="hs_main_cycle_main">
+                    <span class="timer">5000+</span>
+                </div>
+                <h5 class="con4">SỐ CA XỬ LÝ
+                </h5>
+            </div>
+        </div>
+    </div> -->
+    <!-- hs advert wrapper End -->
+    <!-- hs client slider wrapper Start -->
+    <!-- <div class="hs_client_slider_main_wrapper">
+        <div class="container">
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                <div class="hs_about_heading_main_wrapper">
+                    <div class="hs_about_heading_wrapper">
+                        <h2>Đối Tác <span> Tin Tưởng</span></h2>
+                        <h4><span></span></h4>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                <div class="hs_client_slider_wrapper">
+                    <div class="owl-carousel owl-theme">
+                        <div class="item">
+                            <div class="hs_client_img_wrapper">
+                                <img src="./images/logo/logo01.jpg" alt="client_img" />
+                            </div>
+                        </div>
+                        <div class="item">
+                            <div class="hs_client_img_wrapper">
+                                <img src="./images/logo/logo02.jpg" alt="client_img" />
+                            </div>
+                        </div>
+                        <div class="item">
+                            <div class="hs_client_img_wrapper">
+                                <img src="./images/logo/logo03.jpg" alt="client_img" />
+                            </div>
+                        </div>
+                        <div class="item">
+                            <div class="hs_client_img_wrapper">
+                                <img src="./images/logo/logo04.jpg" alt="client_img" />
+                            </div>
+                        </div>
+                        <div class="item">
+                            <div class="hs_client_img_wrapper">
+                                <img src="./images/logo/logo05.jpg" alt="client_img" />
+                            </div>
+                        </div>
+                        <div class="item">
+                            <div class="hs_client_img_wrapper">
+                                <img src="./images/logo/logo06.jpg" alt="client_img" />
+                            </div>
+                        </div>
+                        <div class="item">
+                            <div class="hs_client_img_wrapper">
+                                <img src="./images/logo/logo07.jpg" alt="client_img" />
+                            </div>
+                        </div>
+                        <div class="item">
+                            <div class="hs_client_img_wrapper">
+                                <img src="./images/logo/logo08.jpg" alt="client_img" />
+                            </div>
+                        </div>
+                        <div class="item">
+                            <div class="hs_client_img_wrapper">
+                                <img src="./images/logo/logo09.jpg" alt="client_img" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div> -->
+</div>
+<!-- <script src="js/jquery_min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js" type="text/javascript"></script>
+<script src="../js/pages/data_index.js"></script>
+<script src="../js/pages/sitemap.js"></script> -->
+<script src="js/owl.carousel.js?v=1.0.2.4"></script>
+<script>
+    $(function () {
+        let iCount = 1, iMax = 3, iHeigth = 0;
+        setInterval(function () {
+            if (iHeigth === 0) {
+                let height = $('#banner_img').css('height');
+                $('#banner_img').css('height', height);
+                iHeigth = 1;
+            }
+            $(`#banner_img > div`).removeClass('active fade-in-image');
+            iCount++;
+            if (iCount > iMax)
+                iCount = 1;
+            $(`#banner_img > div:nth-child(${iCount})`).addClass('active fade-in-image');
+        }, 5000);
+
+        addRootCss();
+        setTimeout(function () {
+            if ($('#gridWrapper').length > 0) {
+                /* initialize shuffle plugin */
+                var $grid = $('#gridWrapper');
+
+                $grid.shuffle({
+                    itemSelector: '.portfolio-wrapper' // the selector for the items in the grid
+                });
+
+                /* reshuffle when user clicks a filter item */
+                $('#filter a').on('click', function (e) {
+                    e.preventDefault();
+
+                    // set active class
+                    $('#filter a').removeClass('active');
+                    $(this).addClass('active');
+
+                    // get group name from clicked item
+                    var groupName = $(this).attr('data-group');
+
+                    // reshuffle grid
+                    $grid.shuffle('shuffle', groupName);
+                });
+            }
+
+        }, 350);
+    })
+</script>
+<script src="js/custom.js?v=1.0.2.4"></script>

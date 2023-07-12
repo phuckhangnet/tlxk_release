@@ -1,0 +1,63 @@
+:root {
+    --border: 1px solid #979797;
+    --color-dynamic-1: rgba(86, 192, 216, 1) !important;
+    --color-dynamic-2: rgba(228, 70, 20, 1) !important;
+    --color-dynamic-3: rgba(151, 151, 151, 0.3) !important;
+    --color-dynamic-4: #fff !important;
+    --color-dynamic-5: rgba(197, 241, 251, 1) !important;
+    --color-dynamic-6: rgba(126, 41, 14, 1) !important;
+    --color-dynamic-7: rgba(197, 241, 251, 0.5) !important;
+    --color-dynamic-8: rgba(99, 27, 5, 1) !important;
+}
+
+.title {
+    font-size: 1.8em;
+    font-weight: bold;
+}
+
+.cls-flex {
+    display: flex;
+    justify-content: space-between;
+    align-items: stretch;
+    flex-wrap: wrap;
+}
+
+.cls-flex>div {
+    margin: 0.3em;
+}
+
+button[type="button"] {
+    font-size: 1.1em;
+    border-radius: 0.3em;
+    background-color: var(--color-dynamic-2);
+    color: var(--color-dynamic-1);
+    padding: 0.5em;
+    width: 100%;
+    border: var(--border);
+    text-transform: uppercase;
+    margin: 1.2em 0;
+    font-weight: bold;
+}
+
+button[type="button"]:hover {
+    cursor: pointer;
+    color: var(--color-dynamic-4);
+}
+
+button[type="button"]:active {
+    background-color: var(--color-dynamic-1);
+}
+
+.vscomp-ele {
+    border: 1px solid var(--color-dynamic-1);
+}
+
+div.col-lg-12.col-md-12.col-sm-12.col-xs-12 {
+    padding: 2em 0;
+}
+
+@media only screen and (max-width: 992px) {
+    .cls-flex.cls-flex-col {
+        flex-direction: column;
+    }
+}

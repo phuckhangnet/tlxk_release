@@ -1,0 +1,134 @@
+<style>
+    #qa-sample-page {
+        text-align: justify;
+    }
+
+    #qa-sample-page .container>*:first-child {
+        margin-top: 2em;
+    }
+
+    #qa-sample-page hr {
+        color: var(--color-dynamic-3);
+    }
+
+    #qa-sample-page .question {
+        min-height: 8em;
+        overflow-y: auto;
+        color: var(--color-dynamic-6)
+    }
+
+    #qa-sample-page .answer {
+        height: 8em;
+        overflow-y: auto;
+        color: var(--color-dynamic-6)
+    }
+
+    #qa-sample-page .pages {
+        justify-content: flex-end;
+    }
+
+    #qa-sample-page .btn-page {
+        padding: 0 1em;
+    }
+
+    #qa-sample-page .btn-page:hover {
+        cursor: pointer;
+        color: var(--color-dynamic-2);
+    }
+
+    #qa-sample-page img:not(.content img) {
+        width: 100%;
+        height: auto;
+        max-height: 12em;
+        object-fit: cover;
+    }
+
+    #qa-sample-page #content {
+        color: var(--color-dynamic-1);
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-evenly;
+    }
+
+    #qa-sample-page #content hr {
+        background-color: var(--color-dynamic-1);
+        height: 1px;
+        color: var(--color-dynamic-1)
+    }
+
+    #qa-sample-page #content>div {
+        min-width: calc((100%/3) - 1em);
+        max-width: calc((100%/3) - 1em);
+        margin: 0.5em;
+        padding: 1em;
+        flex: 1;
+        background-color: var(--gray-blur-50);
+        box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
+        /* border-bottom-right-radius: 1em;
+        border-top-left-radius: 1em; */
+    }
+
+    @media only screen and (max-width: 992px) {
+        #qa-sample-page #content {
+            flex-direction: column;
+        }
+
+        #qa-sample-page #content>div {
+            min-width: auto;
+            max-width: unset !important;
+        }
+    }
+
+    #qa-sample-page #content .title {
+        font-size: 1.5em;
+        color: var(--color-dynamic-2);
+    }
+
+    #qa-sample-page #content .date {
+        font-size: 0.8em;
+        text-align: right;
+    }
+
+    #qa-sample-page .content-post>div:not(:last-child) {
+        margin: 0.5em 0;
+    }
+
+    #qa-sample-page #content .read-more {
+        font-size: 0.8em;
+        color: #0000EE;
+        text-align: right;
+    }
+
+    #qa-sample-page .read-more:hover {
+        cursor: pointer;
+        text-decoration: underline;
+    }
+</style>
+
+<div id="qa-sample-page" class="container">
+    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+        <div class="cls-flex pages">
+            <div id="left" class="btn-page"><i class="fa-solid fa-chevron-left"></i></div>
+            <div><span relg="page">Trang</span>: <span id="current-page-post">1</span><span id="number-of-post"></span>
+            </div>
+            <div id="right" class="btn-page"><i class="fa-solid fa-chevron-right"></i></div>
+        </div>
+        <div id="content"></div>
+    </div>
+</div>
+
+<!-- <link rel="stylesheet" type="text/css" href="../css/root.css" />
+<script src="../js/jquery_min.js"></script>
+<script src="../js/pages/data_index.js"></script>
+<script src="../js/pages/sitemap.js"></script> -->
+<script>
+    var soitem = 9;
+    $(function () {
+        let menuid = getUrlParameter("menu-id");
+        let lang = localStorage.getItem('lang');
+        let el_name = 'qa-sample-page';
+        let ob = loadMultiPost(1, el_name, menuid, lang, "qasample", false);
+        loadCountRow(ob.data, el_name, menuid, lang);
+        loadLang(lang);
+    });
+</script>
